@@ -21,8 +21,9 @@ function AddWatchListButton(props) {
             const data = {
                 'id': props.list_id,
             };
+            console.log(headers)
     
-            axios.post(props.list_id + '/store/', data, headers)
+            axios.post( props.list_id + '/store/', data, headers)
             .then(response => {
                 alert('ウォッチリストに追加しました。');
                 navigate('/search');
