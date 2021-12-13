@@ -5,7 +5,7 @@ Reactを用いた上場会社に係る指標取得のフロントエンド
 
 
 # バックエンド(Django)
-https://github.com/ide0402/companydata_front
+https://github.com/ide0402/django_companydata
 
 # ディレクトリ構成
 
