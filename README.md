@@ -19,5 +19,5 @@ django
 - 
 
 # start
-- git clone https://github.com/ide0402/django_stockdata.git
+- git clone https://github.com/ide0402/companydata_front.git
 - ※フロントエンド側の更新時は更新後、「yarn webpack」コマンド で反映
