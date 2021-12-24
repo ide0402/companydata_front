@@ -32,7 +32,6 @@ function WatchListDetail() {
 
     const [form_type, setFormType] = useState('quarter')
     const [accounting_type, setAccountingType] = useState('quarter')
-    // const [fiscal_type, setFiscalType] = useState('quarterly')
     const [display_column, setDisplayColumn] = useState(DEFAULT_DISPLAY_COLUMN)
     let cik_code = ''
 

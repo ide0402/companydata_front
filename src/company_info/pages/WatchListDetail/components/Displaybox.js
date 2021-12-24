@@ -2,43 +2,10 @@ import React, {useState, useEffect} from 'react';
 import 'react-tabs/style/react-tabs.css';
 import Modal from "react-modal"
 
-Modal.setAppElement("#app");
+Modal.setAppElement("#modal");
 
 function Displaybox(props){
     const [modalIsOpen, setIsOpen] = useState(false);
-
-    const onClickApplyButton = () => {
-        let new_display_column = props.display_column;
-        document.getElementsByName('checkbox_display_column').forEach( (checkbox_display_column) =>{
-            let target_column = new_display_column.find( 
-                (column_list) => column_list.column_name == checkbox_display_column.value )
-            target_column.status = checkbox_display_column.checked
-            let target_column_index = new_display_column.findIndex( 
-                (column_list) => column_list.column_name == checkbox_display_column.value )
-            new_display_column.splice( target_column_index, 1, target_column);
-            setDisplayColumn(new_display_column)
-        })
-    }
-
-    const handleChange = (event) => {
-        // console.log(event.target.checked)
-        // console.log(!event.target.checked)
-        // event.target.checked = !event.target.checked
-    }
-
-    useEffect( () => {
-        if (document.getElementsByName('checkbox_display_column') != null){
-            console.log('経過')
-            console.log(document.getElementsByName('checkbox_display_column'))
-            document.getElementsByName('checkbox_display_column').forEach( (checkbox_display_column) =>{
-                console.log(props.display_column.find( (column_list) => column_list.column_name == checkbox_display_column.value ))
-                checkbox_display_column.checked = props.display_column.find( (column_list) => column_list.column_name == checkbox_display_column.value ).status;
-                console.log(checkbox_display_column.checked)
-            })
-        } else {
-            console.log('未処理');
-        }
-    })
 
     const createCheckBoxArea = () => {
         console.log('マウント')
@@ -51,13 +18,61 @@ function Displaybox(props){
                             <input type="checkbox" className="checkbox" name="checkbox_display_column" value={element['column_name']} onChange={ (evt) => handleChange(evt)} />
                             {element['japanese_column_name']}
                         </label>
-                    </li>    
+                    </li>
                 )
             })}
             </ul>
         )
     }
 
+    const onClickApplyButton = () => {
+        let new_display_column = props.display_column;
+        document.getElementsByName('checkbox_display_column').forEach( (checkbox_display_column) =>{
+            let target_column = new_display_column.find( 
+                (column_list) => column_list.column_name == checkbox_display_column.value )
+            target_column.status = checkbox_display_column.checked
+            let target_column_index = new_display_column.findIndex( 
+                (column_list) => column_list.column_name == checkbox_display_column.value )
+            new_display_column.splice( target_column_index, 1, target_column);
+            console.log(new_display_column)
+            props.setDisplayColumn(new_display_column)
+            setIsOpen(false)
+        })
+    }
+
+    const handleChange = (event) => {
+        // console.log(event.target.checked)
+        // console.log(!event.target.checked)
+        // event.target.checked = !event.target.checked
+    }
+
+    useEffect( () => {
+
+        if (document.getElementsByName('checkbox_display_column') != null && modalIsOpen){
+            addCheckToCheckbox();
+        } else {
+            console.log('未処理');
+        }
+    })
+
+    const addCheckToCheckbox = async () => {
+        const CHECKBOX_LIST = document.getElementsByName('checkbox_display_column')
+        await waitProcessUntilDOMLoaded(CHECKBOX_LIST)
+        CHECKBOX_LIST.forEach((checkbox_display_column) => {
+            checkbox_display_column.checked = props.display_column.find( (column_list) => column_list.column_name == checkbox_display_column.value ).status;
+        })    
+    }
+
+    const waitProcessUntilDOMLoaded = (element) => {
+        const ID = setInterval(() => {
+            if (element.length > 0){
+                clearInterval(ID);
+            } else if (time > 10){
+                clearInterval(ID);
+                alert('処理に時間がかかっています。\n後ほど再度実行してください。')
+            }
+        },1000)
+    }
 
     return (
         <div className="display_box">

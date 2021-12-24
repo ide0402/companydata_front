@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Selectbox from './Selectbox';
 import Displaybox from './Displaybox';
+import { debug } from 'webpack';
+
 
 function Accountingresults(props){
 
@@ -45,6 +47,10 @@ function Accountingresults(props){
 
     const ACCOUNTING_DATA = extractNecessaryDataFromAccountingData();
 
+    // const for_debug = () => {
+    //     console.log(props.display_column.filter(element => element['status']));
+    // }
+
     return (
         <div className="pt-4">
             <div className="h2">{FORM_OPTION[props.form_type]}</div>
@@ -78,9 +84,13 @@ function Accountingresults(props){
             <table className="table table-bordered custom-table">
                 <tbody>
                     <tr>
-                    {props.display_column.map((element, index) => (
+                    {props.display_column.filter(element => element['status']).map((element, index) => (
                         <th key={index}>{element['japanese_column_name']}</th>
                     ))}
+                    {/* {for_debug()} */}
+                    {/* {props.display_column.map((element, index) => (
+                        <th key={index}>{element['japanese_column_name']}</th>
+                    ))} */}
                     </tr>
                     {ACCOUNTING_DATA.map((data, index) => (
                     <tr key={index}>
