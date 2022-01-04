@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import 'react-tabs/style/react-tabs.css';
 import Modal from "react-modal"
 
-Modal.setAppElement("#modal");
+Modal.setAppElement("#app");
 
 function Displaybox(props){
     const [modalIsOpen, setIsOpen] = useState(false);
