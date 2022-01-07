@@ -62,6 +62,8 @@ function Accountingresults(props){
                     setAccountingType={props.setAccountingType}
                     form_type={props.form_type}
                     setFormType={props.setFormType}
+                    accountingTypeDisabledStatus={props.accountingTypeDisabledStatus}
+                    setAccountingTypeDisabledStatus={props.setAccountingTypeDisabledStatus}
                 />
                 <Selectbox 
                     placeholder_type="form_type"
@@ -71,6 +73,8 @@ function Accountingresults(props){
                     setAccountingType={props.setAccountingType}
                     form_type={props.form_type}
                     setFormType={props.setFormType}
+                    accountingTypeDisabledStatus={props.accountingTypeDisabledStatus}
+                    setAccountingTypeDisabledStatus={props.setAccountingTypeDisabledStatus}
                 />
             </div>
 
@@ -84,7 +88,7 @@ function Accountingresults(props){
                     </tr>
                     {ACCOUNTING_DATA.map((data, index) => (
                     <tr key={index}>
-                        {props.display_column.map((element, index_col) => (
+                        {props.display_column.filter(element => element['status']).map((element, index_col) => (
                         <td key={index_col}>{data[element['column_name']]}</td>
                         ))}                        
                     </tr>

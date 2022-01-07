@@ -8,7 +8,6 @@ function Displaybox(props){
     const [modalIsOpen, setIsOpen] = useState(false);
 
     const createCheckBoxArea = () => {
-        console.log('マウント')
         return (
             <ul className="list row p-2 h5 mb-2 mt-2">
             {props.display_column.map( (element, index) => {
@@ -26,7 +25,7 @@ function Displaybox(props){
     }
 
     const onClickApplyButton = () => {
-        let new_display_column = props.display_column;
+        let new_display_column = props.display_column.slice(0, props.display_column.length);
         document.getElementsByName('checkbox_display_column').forEach( (checkbox_display_column) =>{
             let target_column = new_display_column.find( 
                 (column_list) => column_list.column_name == checkbox_display_column.value )
@@ -35,9 +34,9 @@ function Displaybox(props){
                 (column_list) => column_list.column_name == checkbox_display_column.value )
             new_display_column.splice( target_column_index, 1, target_column);
             console.log(new_display_column)
-            props.setDisplayColumn(new_display_column)
-            setIsOpen(false)
         })
+        setIsOpen(false)
+        props.setDisplayColumn(new_display_column)
     }
 
     const handleChange = (event) => {
