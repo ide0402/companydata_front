@@ -7,7 +7,9 @@ function Selectbox(props){
         if (document.getElementById('awesomeness-' + props.placeholder_type + props.state) != null){
             document.getElementById('awesomeness-' + props.placeholder_type + props.state).checked = true;
         }
+        document.getElementById('awesomeness-opener_accounting_type').disabled = props.accountingTypeDisabledStatus;
     })
+
 
     // props placeholder_type, select_option
     const PLACEHOLDER_TEXT = {
@@ -21,13 +23,15 @@ function Selectbox(props){
             props.statehook(option);
             if (props.placeholder_type == 'form_type' && option == 'annual'){
                 props.setAccountingType('total');
-                setAccountingTypeDisabledStatus(true);
+                props.setAccountingTypeDisabledStatus(true);
+            } else {
+                props.setAccountingTypeDisabledStatus(false);
             }
         }
     }
 
     return (
-        <div className="select_box">
+        <div className="select_box" id={props.placeholder_type}>
             <ul className="select">
                 <li>
                     <input className="select_close" type="radio" name={"awesomeness_" + props.placeholder_type} id={"awesomeness-close_" + props.placeholder_type} value="" onChange={() => handleChange('')}/>

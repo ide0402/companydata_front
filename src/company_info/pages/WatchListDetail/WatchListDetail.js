@@ -29,7 +29,7 @@ function WatchListDetail() {
         {'column_name':'net_income',         'japanese_column_name':'純利益',   'status':true},
         {'column_name':'earnings_per_share', 'japanese_column_name':'EPS',     'status':true}
     ]
-
+    const [accountingTypeDisabledStatus, setAccountingTypeDisabledStatus] = useState(false);
     const [form_type, setFormType] = useState('quarter')
     const [accounting_type, setAccountingType] = useState('quarter')
     const [display_column, setDisplayColumn] = useState(DEFAULT_DISPLAY_COLUMN)
@@ -123,6 +123,8 @@ function WatchListDetail() {
                         display_column={display_column}
                         setDisplayColumn={setDisplayColumn}
                         default_display_column={DEFAULT_DISPLAY_COLUMN}
+                        accountingTypeDisabledStatus={accountingTypeDisabledStatus}
+                        setAccountingTypeDisabledStatus={setAccountingTypeDisabledStatus}
                     />
                 </TabPanel>
                 <TabPanel>
